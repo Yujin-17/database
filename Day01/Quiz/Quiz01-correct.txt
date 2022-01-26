@@ -1,0 +1,18 @@
+CREATE TABLE `score`(
+	`id` int Not null auto_increment primary key
+    , `name` varchar(8) not null
+    , `year` smallint not null
+    , `term` char(4) not null
+    , `title` varchar(4) not null
+    , `score` smallint not null
+    , `createdAt` timestamp DEFAULT CURRENT_TIMESTAMP
+    , `updatedAt` timestamp DEFAULT CURRENT_TIMESTAMP
+    )ENGINE=InnoDB default CHARSET=utf8mb4;
+    
+desc `score`;
+    
+ALTER TABLE `score` ADD COLUMN `semester` tinyint not null after `year`;
+
+ALTER TABLE `score` MODIFY COLUMN `name` varchar(32) not null;
+
+ALTER TABLE `score` CHANGE COLUMN `title` `subject` varchar(16) not null;

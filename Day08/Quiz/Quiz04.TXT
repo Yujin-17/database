@@ -1,0 +1,106 @@
+create table `singer` ( 
+	`id` int not null auto_increment primary key
+    , `name` varchar(10) not null
+    , `debut` int not null
+    , `agency` varchar(10) not null
+	, `createdAt` timestamp DEFAULT CURRENT_TIMESTAMP
+    , `updatedAt` timestamp DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `album` ( 
+	`id` int not null auto_increment primary key
+	,`albumId` int not null
+	,`title` varchar(20) not null
+    , `releaseDate` date not null
+    , `tracks` int not null
+	, `createdAt` timestamp DEFAULT CURRENT_TIMESTAMP
+    , `updatedAt` timestamp DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `music` ( 
+	`id` int not null auto_increment primary key
+    , `musicId` int not null 
+	, `title` varchar(30) not null
+    , `playTime` int not null
+    , `lyricist` varchar(10) not null
+    , `composer` varchar(10) not null 
+	, `createdAt` timestamp DEFAULT CURRENT_TIMESTAMP
+    , `updatedAt` timestamp DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+insert into `singer`
+(`name`, `debut`, `agency`, `createdAt`, `updatedAt`)
+values
+('성시경', 2000, '에스케이재원', now(), now())
+,('AKMU', 2014, 'YG엔터테인먼트', now(), now())
+,('아이유', 2008, '이담엔터테인먼트', now(), now());
+
+insert into `album`
+(`albumId`,`title`, `releaseDate`, `tracks`, `createdAt`, `updatedAt`)
+values
+(1,'The Ballads', '2006-10-10', 16, now(), now())
+,(1,'여기, 내 맘속에...', '2008-06-12', 11, now(), now())
+,(2,'항해', '2019-09-25', 10, now(), now())
+,(2,'SUMMER EPISODE', '2017-07-20', 4, now(), now())
+,(3,'Love poem', '2019-11-18', 6, now(), now())
+,(3,'Palette', '2017-04-21', 6, now(), now());
+
+insert into `music`
+(`musicId`, `title`, `playTime`, `lyricist`, `composer`, `createdAt`, `updatedAt`)
+values
+(1, '거리에서', 279, '윤종신', '윤종신', now(), now())
+,(1, '그리운 날엔', 250, '심재희', '김형석', now(), now())
+,(1, '바람, 그대', 250, '이미나', '하림', now(), now())
+,(2, '여기 내 맘속에', 250, '이미나', '유희열', now(), now())
+,(2, '안녕 나의 사랑', 257, '유희열', '성시경', now(), now())
+,(3, '어떻게 이별까지 사랑하겠어, 널 사랑하는 거지', 290, '이찬혁', '이찬혁', now(), now())
+,(4, 'DINOSAUR', 240, '이찬혁', '이찬혁', now(), now())
+,(4, 'MY DARLING', 225, '이찬혁', '이찬혁', now(), now())
+,(5, 'Blueming', 217, '아이유', '이종훈', now(), now())
+,(5, 'Love poem', 258, '아이유', '이종훈', now(), now())
+,(6, '밤편지', 253, '아이유', '김희원', now(), now())
+,(6, '팔레트', 217, '아이유', '아이유', now(), now());
+
+select c.title, c.composer, B.title
+from singer as A
+join album as B
+on a.id = b.albumId
+join music as C
+on b.Id = c.musicId
+where b.releaseDate between '2010-01-01' and '2020-01-01'  --  between 뒤쪽 날짜 포함 x !!;
+
+select a.name, a.debut, count(*)
+from singer as A
+join album as B
+on a.id = b.albumId
+join music as C
+on b.Id = c.musicId
+where a.debut >=2005
+group by a.name
+order by count(*) desc;
+
+select a.name, c.title, c.playTime, b.title
+from singer as A
+join album as B
+on a.id = b.albumId
+join music as C
+on b.Id = c.musicId
+where a.name = 'AKMU';
+
+select c.title, a.name, c.playTime, b.title
+from singer as A
+join album as B
+on a.id = b.albumId
+join music as C
+on b.Id = c.musicId
+where b.releaseDate between '2008-01-01' and '2018-01-01' and c.playTime >= 240;
+
+select a.name, b.title, b.tracks, sum(c.playTime)
+from singer as A
+join album as B
+on a.id = b.albumId
+join music as C
+on b.Id = c.musicId
+group by b.title
+having sum(c.playTime) > 470
+order by sum(c.playTime);

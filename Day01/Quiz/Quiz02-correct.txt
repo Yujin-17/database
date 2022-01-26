@@ -1,0 +1,17 @@
+create table `review`(
+	`id` int not null auto_increment primary key
+    , `store` varchar(8) not null 
+    , `menu` varchar(8) not null
+    , `point` decimal(2, 1) not null default 3.5 -- 예) 4.5  총 두자리,  소수점 자리수 1 
+	, `review` varchar(256) null -- null을 생략하면 null 허용 
+    , `createdAt` timestamp default current_timestamp
+    , `updatedAt` timestamp default current_timestamp
+) engine=InnoDB default charset=utf8mb4;
+
+alter table `review` add column `userName` varchar(32) not null after `menu`;
+
+desc `review`;
+
+alter table `review` modify column `menu` varchar(32) not null;
+
+alter table `review` change column `store` `storeName` varchar(32) not null; 

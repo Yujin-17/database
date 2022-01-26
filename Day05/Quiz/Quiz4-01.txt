@@ -1,0 +1,16 @@
+select * from `review`;
+
+explain select * from `review` where `userName` = '이정재';
+
+explain select * from `review` 
+where `point` <= 3.0 and `userName` = '이병헌';
+
+explain select * from `review`
+where `storeName` = '교촌치킨' and `point` <= 4.0;
+
+explain select `storeName`, avg(`point`) from `review`
+group by `storeName`;
+
+-- 인덱스 추가
+alter table `review` add index `idx_userName` (`userName`);
+alter table `review` add index `idx_storeName` (`storeName`);

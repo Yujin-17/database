@@ -1,0 +1,14 @@
+select * from `review`
+where `point` <= 3.0;
+
+select `menu`, `review`, `point` from `review`
+where `storeName` = '교촌치킨' and `review` is not null;
+
+select count(*) from `review`
+where `storeName` = "BHC" and `userName` = '전지현';
+
+select * from `review`
+where `userName` = '강동원' and `createdAt` >= '2025-03-11 00:00:00';
+
+select * from `review`
+where `userName` = '이정재' and (`review` is not null or `point` >= 4.5);

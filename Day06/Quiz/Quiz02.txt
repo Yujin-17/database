@@ -1,0 +1,42 @@
+create table `store_info`(
+	`id` int not null auto_increment primary key
+    , `store` varchar(10) not null
+    , `phoneNumber` char(20) not null
+    , `address` varchar(32) not null
+    , `businessNumber` varchar(20) not null
+    , `introduce` varchar(100) not null
+    , `createdAt` timestamp default current_timestamp
+    , `updatedAt` timestamp default current_timestamp
+)engine=InnoDB default charset=utf8mb4;
+
+CREATE TABLE `store_review` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `userId` INT NOT NULL,
+    `menu` VARCHAR(20) NOT NULL,
+    `userName` VARCHAR(10) NOT NULL,
+    `point` DECIMAL(2 , 1 ) NOT NULL,
+    `review` VARCHAR(100),
+    `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
+
+insert into `store_info`
+(`store`, `phoneNumber` ,`address`, `businessNumber`, `introduce`, `createdAt`, `updatedAt` )
+values
+('교촌치킨', '02-000-0000','서울시 서초구','111-111-1111','항상 맛있는 닭을 선사합니다.', now(), now())
+,('BHC', '02-111-0000','서울시 서초구','111-222-1111','전지현씨 BHC', now(), now())
+,('버거킹', '02-222-1111','서울시 서초구','333-222-12222','맥도날드 가지말고 여기로와요', now(), now());
+
+-- dummy date 
+insert into `store_review` 
+(`userId`, `menu`, `userName`, `point`, `review`, `createdAt`, `updatedAt`)
+values
+(1, '오리지날콤보', '이병헌', 4.5, '콤보는 항상 진리입니다.', now(),now())
+,(2, '핫후라이드', '전지현', 5.0, null, now(),now())
+,(2, '뿌링클', '이정재', 3.5, '내가 뿌링클 상인가?', now(),now())
+,(3, '와퍼세트', '이병헌', 4.0, '패티가 너무 좋아요', now(),now())
+,(1, '오리지날콤보', '맛있으면짖는개', 4.5, '왈왈왈!! 왈왈!', now(),now())
+,(2, '뿌링클', '전지현', 5.0, null, now(),now());
+
+select `menu`, `userName`, `point`, `review` from `store_review`
+where `userId` = 1;

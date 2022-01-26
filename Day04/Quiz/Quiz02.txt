@@ -1,0 +1,20 @@
+select * from `review`;
+
+select * from `review`
+where `userName` = '맛있으면짖는개' and `review` like '왈왈%';
+
+select * from `review`
+order by `createdAt` desc
+limit 10;
+
+select * from `review`
+where `storeName` = '교촌치킨'
+order by `point` desc;
+
+select concat('작성자: ', `userName` , ' 가게명: ', `storeName`)  AS 'lowScore' from `review`
+order by `point` asc
+limit 1 ;
+
+select `userName` , `storeName`  from `review`
+order by `point` asc
+limit 1 ;

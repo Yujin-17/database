@@ -1,0 +1,28 @@
+select * from `score`;
+
+update `score`
+set
+`score` = 100
+, `updatedAt` = now()
+where `id` = 7;
+
+update `score`
+set 
+`score` = 85
+, `updatedAt` = now()
+where `name` = '이광수' and `year` = 2019 and `semester`= 2 and `subject` = '수학';
+
+select * from `review`;
+
+update `review`
+set 
+ `review` = concat(`review`, '역시 치킨은 BBQ 인정!')
+, `updatedAt` = now()
+where `id` = 10;
+
+update `review`
+set 
+`point` = 4.8
+, `review` = "식어도 맛있어요!!"
+, `updatedAt` = now()
+where `id` = 12;

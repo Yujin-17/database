@@ -1,0 +1,26 @@
+select * from `review`;
+
+select `userName`,count(*) from `review`
+group by `userName`;
+
+select `storeName` , avg(`point`) from `review`
+group by `storeName`;
+
+select `userName` from `review`
+group by `userName`
+having count(*) >= 4;
+
+select `userName`, count(*) as count from `review`
+group by `userName`
+having count >= 4;
+
+select * from `score`;
+
+select `subject`, avg(`score`) from `score`
+where `year` = 2020 and `semester` = 1 and `term` = '기말고사'
+group by `subject`;
+
+select `name`, avg(`score`) as `average` from `score`
+where `year` = 2020
+group by `name`
+order by `average` desc;

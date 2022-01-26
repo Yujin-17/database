@@ -1,0 +1,43 @@
+/*
+	CRUD
+	c: create -> insert
+    r: read	  -> select
+    u: update -> update
+    d: delete -> delete 
+*/
+
+-- 한 행 추가
+insert into `user` 
+(
+	/* `id`  auto_increment 이므로 추가하지 않는다. */ 
+    `name`
+    , `yyyymmdd`
+    , `hobby`
+    , `introduce`
+    , `email`
+    , `createdAt`  /* 기본값이 current_timestamp이기 때문에 넣지 않아도 현재시간이 들어감 */
+    , `updatedAt`
+)
+value
+(
+	'이유진'
+    , '19990717' 
+    , '독서, 노래, 영화'
+    , '안녕하세요.\n 이유진입니다.'
+    , 'lyjyellow@naver.com'
+    , now()
+    , now()
+);
+
+desc `user`;
+
+select * from `user`;
+
+-- 한번에 여러행 추가
+insert into `user`
+(`name`, `yyyymmdd`, `hobby`, `introduce`, `email`)
+values
+('이재혁', '19990421', 'league of legends', '이재혁입니다.', '?'),
+('이연아', '19980405', '독서', '이연아입니다.', '???'),
+('이연아', '19990304', '놀기', '나는 다 잘한다.', 'ㅋㅋㅋ');
+

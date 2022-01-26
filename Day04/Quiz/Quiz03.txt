@@ -1,0 +1,1 @@
+having `year` = 2020 and `semester` = 1 and `term` = '기말고사';

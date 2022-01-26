@@ -1,0 +1,56 @@
+# 홍당무 마켓
+-- 저장해야 하는 값
+/* 
+	판매자 정보: 닉네임, 프로필 이미지(img url) - NULL 허용, 매너온도, (물품 목록)
+    물품: 제목, 물품 설명, 가격, 물품 사진, 판매자 PK(판매자 닉네임, 매너온도, 프로필 이미지)
+*/
+# 판매자 테이블 생성
+create table `seller`(
+	`id` int not null auto_increment primary key
+    , `nickname` varchar(20) not null
+    , `profileImageUrl` varchar(512) null -- null 안써도 null 허용 
+    , `temperature` decimal(3, 1) not null	-- 36.5 ~ 99도
+    , `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    , `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)engine=InnoDB default charset=utf8mb4;
+
+# 물품 테이블 생성
+create table `used_goods`(
+	`id` int not null auto_increment primary key
+    , `sellerId` int not null
+    , `title` varchar(64) not null 
+    , `description` text not null
+    , `price` Int not null
+    , `pictureUrl` varchar(512) -- null 허용
+    , `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    , `updatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)engine=InnoDB default charset=utf8mb4;
+
+insert into `seller` (`nickname`, `profileImageUrl`, `temperature`)
+values
+('이유진', 'https://cdn.pixabay.com/photo/2019/03/23/08/21/lioness-4074897_960_720.jpg', '36.5')
+,('이유딘', 'https://cdn.pixabay.com/photo/2021/12/24/06/48/bird-6890550_960_720.jpg', '36.5')
+,('이바다', NULL, '36.5')
+,('이범수', 'https://cdn.pixabay.com/photo/2021/08/08/22/19/redtail-hawk-6532079_960_720.jpg', '36.5')
+,('김범수', NULL, '36.5')
+,('라리라', 'https://cdn.pixabay.com/photo/2022/01/06/06/08/katun-river-6918707_960_720.jpg', '36.5');
+
+insert into `used_goods`(`sellerId`, `title`, `description`, `price`, `pictureUrl`)
+values
+(1, '플스4팝니다.', '쿨거래 하실분들 연락주세요', 100000, 'https://media.istockphoto.com/photos/top-view-of-gamer-workspace-and-gear-like-mouse-keyboard-joystick-vr-picture-id1304167720')
+,(1, '원피스 팝니다.', '살이 빠져서 사이즈가 커져서 못입습니다', 20000, 'https://media.istockphoto.com/photos/flowery-evase-bateau-yellow-dress-picture-id178851955?k=20&m=178851955&s=612x612&w=0&h=PbB6SOjyZNIzTYr3qC7IY-qn1tsWWHyojRfs4XB8WhM=')
+,(3, '후라다 여성지갑 팝니다', '오늘 선물하려 했는데 헤어졌어요', 200000, NULL)
+,(2, '바퀴벌레좀 잡아주세요', '제발 잡아주세요. 못들어가고 있어요.' , 5000, NULL);
+
+select * from `used_goods`;
+-- 이유진의 판매 물품 리스트 가져오기
+select * from `seller` where `nickname` = '이유진'; -- 1
+select * from `used_goods` where `sellerId` = 1;
+
+-- 바퀴벌레를 잡아달라는 사람의 닉네임과 매너온도 확인하기
+select * from `used_goods` where `title` like '바퀴벌레%'; -- 2
+select * from `seller` where `id` = 2;
+
+
+
+

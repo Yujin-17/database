@@ -1,0 +1,16 @@
+# id가 9인 데이터의 email 주소를 'aaa@gmail.com'으로 변경하기
+select * from `user`;
+
+update `user`
+set 
+`email` = 'aaa@gmail.com'
+, `updatedAt` = now()
+where `id` = 9;
+
+# id가 10인 데이터의 취미를 '맛집탐방', 자기소개 '강남 맛집 전문가' 변경
+update `user`
+set 
+`hobby` = '맛집탐방'
+, `introduce` = '강남 맛집 전문가'
+, `updatedAt` = now()
+where `id` = 10;

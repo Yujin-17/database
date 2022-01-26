@@ -1,0 +1,11 @@
+# id가 11인 데이터 삭제하기
+select * from `user` where `id` = 11;
+
+delete from `user` where `id` = 11; 
+
+# 테이블 내용 전체 삭제
+delete from `user`;
+
+# 테이블 내용 전체 삭제 - 초기화, 테이블을 drop table 후 생성한다. 
+truncate table `user`;
+

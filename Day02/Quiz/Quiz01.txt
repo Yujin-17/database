@@ -1,0 +1,23 @@
+insert into `score`(`name`,`year`,`semester`,`term`,`subject`,`score`)
+value('유재석', 2021, 1, '중간고사', '국어', 80);
+insert into `score`(`name`,`year`,`semester`,`term`,`subject`,`score`)
+value('유재석', 2021, 1, '중간고사', '영어', 90);
+insert into `score`(`name`,`year`,`semester`,`term`,`subject`,`score`)
+value('유재석', 2021, 1, '중간고사', '수학', 95);
+
+desc `score`;
+
+insert into `score`(
+`name`
+,`year`
+,`semester`
+,`term`
+,`subject`
+,`score`
+)
+values
+('조세호', 2021, 1, '중간고사', '국어', 75),
+('조세호', 2021, 1, '중간고사', '영어', 80),
+('조세호', 2021, 1, '중간고사', '수학', 95);
+
+select * from `score`;

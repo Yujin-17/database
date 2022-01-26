@@ -1,0 +1,41 @@
+create table `student2`(
+	`id` int not null auto_increment primary key
+    , `name` varchar(10) not null
+    , `phoneNumber` char(20) not null
+    , `email` varchar(32) not null
+    , `dreamJob` varchar(10) not null
+    , `createdAt` timestamp default current_timestamp
+    , `updatedAt` timestamp default current_timestamp
+)engine=InnoDB default charset=utf8mb4;
+
+create table `student2_score`(
+	`id` int not null auto_increment primary key
+    , `userId` int not null		-- new user 테이블의 id 필드 값(pk)
+    , `year` smallInt not null
+    , `semester` smallint not null
+    , `term` varchar(4) not null
+    , `subject` varchar(3) not null
+    , `score` smallint not null
+    , `createdAt` timestamp default current_timestamp
+    , `updatedAt` timestamp default current_timestamp
+)engine=InnoDB default charset=utf8mb4;
+
+insert into `student2`
+(`name`, `phoneNumber` ,`email`, `dreamJob`, `createdAt`, `updatedAt` )
+values
+('유재석', '01000001111','mc_u@naver.com','래퍼', now(), now())
+,('조세호', '01011110000','josep@gmail.com','변호사', now(), now());
+
+-- dummy date 
+insert into `student2_score` 
+(`userId`, `year`, `semester`, `term`, `subject`, `score`, `createdAt`, `updatedAt`)
+values
+(1, 2020, 1, '중간고사', '국어', 80, now(), now())
+,(1, 2020, 1, '중간고사', '영어', 95, now(), now())
+,(1, 2020, 1, '중간고사', '수학', 90, now(), now())
+,(2, 2020, 1, '중간고사', '국어', 85, now(), now())
+,(2, 2020, 1, '중간고사', '영어', 90, now(), now())
+,(2, 2020, 1, '중간고사', '수학', 70, now(), now());
+
+select `year`, `semester`, `term`, `subject`, `score` from `student2_score`
+where `userID` =  2;

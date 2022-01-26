@@ -1,0 +1,64 @@
+create table `realtor`(
+	`id` int not null auto_increment primary key
+	, `office` varchar(10) not null
+    , `phoneNumber` varchar(20) not null
+    , `address` varchar(100) not null
+    , `grade` varchar(10) not null
+    , `createdAt` timestamp default current_timestamp
+    , `updatedAt` timestamp default current_timestamp
+)engine=InnoDB default charset=utf8mb4;
+
+create table `real_estate` (
+	`id` int not null auto_increment primary key
+    , `realId` int not null
+    , `address` varchar(100) not null
+    , `area` int not null
+    , `type` varchar(10) not null
+    , `price` int not null
+    , `rentPrice` int
+	, `createdAt` timestamp default current_timestamp
+    , `updatedAt` timestamp default current_timestamp
+)engine=InnoDB default charset=utf8mb4;
+
+insert into `realtor`
+(`office`, `phoneNumber`, `address`, `grade`, `createdAt`, `updatedAt`)
+values
+('황금 부동산' , '02-300-2000' , '서울시 동작구', '안심중개사', now(), now())
+,('대박 공인중개사' , '02-000-7777' , '서울시 서초구', '일반중개사', now(), now());
+
+-- dummy date
+insert into `real_estate`
+(`realId` , `address`, `area`, `type`, `price`,`rentPrice`, `createdAt`, `updatedAt`)
+values
+(1, '레미얀 레이크 아파트 301동 905호', 84, '전세', 40000, NULL, now(),now())
+,(2, '레알편한세상 시티 505동 101호', 110, '매매', 120000, NULL, now(),now())
+,(1, '롱데캐슬 101동 402호', 87, '월세', 20000, 200, now(),now())
+,(1, '슼뷰 오피스텔 1210호', 55, '월세', 10000, 100, now(),now())
+,(2, '푸르지용 리버 203동 804호', 123, '매매', 170000, NULL, now(),now());
+
+select * from `realtor`;
+select * from `real_estate`;
+
+
+select '황금 부동산', '02-300-2000' ,`address`,`price`, `rentPrice`  from `real_estate`
+where `realId` = 1 and `type` = '월세';
+
+create table `option` (
+	`id` int not null auto_increment primary key
+    , `realEstateId` int not null
+    , `option` varchar(8) not null
+	, `createdAt` timestamp default current_timestamp
+    , `updatedAt` timestamp default current_timestamp
+)engine=InnoDB default charset=utf8mb4;
+
+# 데이터 추가
+insert into `option`
+(`realEstateId` ,`option`, `createdAt`, `updatedAt`)
+values
+(1, '냉장고' , now(),now())
+,(1,'에어컨', now(), now())
+,(2, '세탁기', now(), now())
+,(2, '옷장', now(), now());
+
+
+select * from `option`;
